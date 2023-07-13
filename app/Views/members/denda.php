@@ -24,9 +24,15 @@
                         <th scope="col">Peminjam</th>
                         <th scope="col">Judul Buku</th>
                         <th scope="col">ISBN</th>
+                        <th scope="col">Tanggal Pinjam</th>
                         <th scope="col">Tanggal Kembali</th>
                         <th scope="col">Denda</th>
-                        <th scope="col">Action</th>
+                        <?php if(session()->get('id')==1):
+              echo '<th scope="col">Action</th>';
+            else:
+                echo "";
+            endif;
+              ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,18 +43,29 @@
                         <td><?=$denda['fullname']; ?></td>
                         <td><?=$denda['judul']; ?></td>
                         <td><?=$denda['ISBN']; ?></td>
+                        <td><?=$denda['tanggal_pinjam']; ?></td>
                         <td><?=$denda['tanggal_kembali']; ?></td>
                         <td>
                             <?php
-                                //Denda 500 per hari
-                                $bayar = 500;
+                                //Denda 2000 per hari
+                                $bayar = 2000;
                                 $now = time();
                                 $tanggal_kembali = strtotime($denda['tanggal_kembali']);
                                 $datediff = $now - $tanggal_kembali;
+                                if ($now<$tanggal_kembali){
+
+                                }
+                                else{
                                 echo 'Rp'.number_format(round($datediff / (60 * 60 * 24))*$bayar, 0, '.', ','); 
+                                }
                             ?>
                         </td>
-                        <td><a href="delete_denda/<?=$denda['id'];?>" class="btn btn-danger">Sudah bayar</a></td>
+                        <?php if(session()->get('id')==1):
+              echo '<td><a href="delete_denda/'.$denda["id"].'" class="btn btn-danger">Sudah bayar</a></td>';
+            else:
+                echo "";
+            endif;
+              ?>
                     </tr>    
                     <?php endforeach;?>
                 </tbody>

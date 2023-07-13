@@ -3,7 +3,7 @@
 use CodeIgniter\Model;
 
 class UserModel extends Model{
-  protected $table = 'admin';
+  protected $table = 'login';
   protected $allowedFields = ['firstname', 'lastname', 'username', 'password', 'updated_at'];
   protected $beforeInsert = ['beforeInsert'];
   protected $beforeUpdate = ['beforeUpdate'];

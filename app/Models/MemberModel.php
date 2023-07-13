@@ -4,7 +4,7 @@ use CodeIgniter\Model;
 
 class MemberModel extends Model{
   protected $table = 'anggota';
-  protected $allowedFields = ['nik', 'fullname', 'phone', 'email', 'alamat', 'updated_at'];
+  protected $allowedFields = ['nis', 'fullname','jurusan', 'kelas','phone', 'email', 'updated_at'];
   protected $beforeInsert = ['beforeInsert'];
   protected $beforeUpdate = ['beforeUpdate'];
   

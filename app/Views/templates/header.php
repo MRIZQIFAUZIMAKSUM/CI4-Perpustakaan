@@ -29,7 +29,11 @@
               Buku
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarBuku">
-            <a class="dropdown-item" href="/katalog/add">Tambah Katalog</a>
+            <?php if(session()->get('id')==1):
+              echo '<a class="dropdown-item" href="/katalog/add">Tambah Katalog</a>';
+            else:
+            endif;
+              ?>
               <a class="dropdown-item" href="/katalog/list">Katalog Buku</a>
               <a class="dropdown-item" href="/katalog/pinjam_buku">Pinjam Buku</a>
               <a class="dropdown-item" href="/katalog/kembali_buku">Kembalikan Buku</a>
@@ -42,7 +46,13 @@
               Anggota
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarAnggota">
-              <a class="dropdown-item" href="/members/add">Daftar</a>
+            <?php if(session()->get('id')==1):
+              echo '<a class="dropdown-item" href="/members/add">Daftar</a>';
+            else:
+                echo "";
+            endif;
+              ?>
+              
               <a class="dropdown-item" href="/members/list">List Anggota</a>
               <a class="dropdown-item" href="/members/denda">Denda</a>
             </div>
@@ -50,7 +60,12 @@
         </ul>
         <ul class="navbar-nav my-2 my-lg-0">
         <li class="nav-item active">
-            <a class="nav-link"  href="#">Admin</a>
+            <a class="nav-link"  href="#"> <?php if(session()->get('id')==1):
+              echo "Admin";
+            else:
+                echo "User";
+            endif;
+              ?></a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarProfile" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -65,7 +80,7 @@
       <?php else: ?>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item <?= ($uri->getSegment(1) == '' ? 'active' : null) ?>">
-            <a class="nav-link" href="/">Login</a>
+            <a class="nav-link" href="/login">Login</a>
           </li>
           <li class="nav-item <?= ($uri->getSegment(1) == 'register' ? 'active' : null) ?>">
             <a class="nav-link" href="/register">Register</a>

@@ -22,13 +22,19 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Member ID</th>
-                        <th scope="col">NIK</th>
+                        <th scope="col">nis</th>
                         <th scope="col">Nama Lengkap</th>
                         <th scope="col">No. Telp</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Alamat</th>
                         <th scope="col">Tanggal Registrasi</th>
-                        <th scope="col" colspan="2" >Action</th>
+
+                        <?php if(session()->get('id')==1):
+              echo '<th scope="col">Action</th>';
+            else:
+                echo "";
+            endif;
+              ?>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -37,14 +43,19 @@
                     <tr>
                         <th scope="row"><?= $counter += 1 ?></th>
                         <td><?= $anggota['id']; ?></td>
-                        <td><?= $anggota['nik']; ?></td>
+                        <td><?= $anggota['nis']; ?></td>
                         <td><?= $anggota['fullname']; ?></td>
                         <td><?= $anggota['phone']; ?></td>
                         <td><?= $anggota['email']; ?></td>
-                        <td><?= $anggota['alamat']; ?></td>
                         <td><?= $anggota['created_at']; ?></td>
-                        <td><a href="edit/<?=$anggota['id'];?>" class="btn btn-success">Edit</a></td>
-                        <td><a href="delete/<?=$anggota['id'];?>" class="btn btn-danger">Delete</a></td>
+                        <?php if(session()->get('id')==1):
+              echo '
+              <td><a href="edit/'.$anggota["id"].'" class="btn btn-success">Edit</a></td>
+              <td><a href="delete/'.$anggota["id"].'" class="btn btn-danger">Delete</a></td>';
+            else:
+                echo "";
+            endif;
+              ?>
                     </tr>    
                     <?php endforeach;?>
                 </tbody>

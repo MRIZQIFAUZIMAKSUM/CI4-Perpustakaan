@@ -1,6 +1,7 @@
 <?php namespace App\Controllers;
 
 use App\Models\UserModel;
+use App\Models\MemberModel;
 
 class Users extends BaseController
 {
@@ -12,7 +13,7 @@ class Users extends BaseController
 		if ($this->request->getMethod() == 'post') {
 			//let's do the validation here
 			$rules = [
-				'username' => 'required|min_length[3]|max_length[20]',
+				'username' => 'required|min_length[3]|max_length[100]',
 				'password' => 'required|min_length[8]|max_length[255]|validateUser[username,password]',
 			];
 
@@ -30,9 +31,14 @@ class Users extends BaseController
 				$user = $model->where('username', $this->request->getVar('username'))
 											->first();
 
-				$this->setUserSession($user);
+				$userauth = $this->setUserSession($user);
 				//$session->setFlashdata('success', 'Successful Registration');
-				return redirect()->to('dashboard');
+				if ($userauth==true){
+					return redirect()->to('dashboard');
+				}
+				else{
+					return redirect()->to('/login?msg='+$userauth);
+				}
 
 			}
 		}
@@ -42,16 +48,48 @@ class Users extends BaseController
 		echo view('login', $data);
 		echo view('templates/footer');
 	}
+	public function landingpage(){
+		echo view('landingpage');
+	}
 
 	private function setUserSession($user){
-		$data = [
-			'id' => $user['id'],
-			'firstname' => $user['firstname'],
-			'lastname' => $user['lastname'],
-			'username' => $user['username'],
-			'isLoggedIn' => true,
-		];
-
+		if($user['id']==1)
+		{
+			$data = [
+				'id' => $user['id'],
+				'firstname' => $user['firstname'],
+				'lastname' => $user['lastname'],
+				'username' => $user['username'],
+				'isLoggedIn' => true,
+			];
+		}
+			
+		  else{
+			$data = [];
+			$model = new MemberModel();
+			if($model->where('email',  $user['username'])->first()){
+				if($member = $model->where('email',  $user['username'])->first()){
+				$nis = $member['nis'];
+				$data = [
+					'id' => $user['id'],
+					'nis' => $nis,
+					'firstname' => $user['firstname'],
+					'lastname' => $user['lastname'],
+					'username' => $user['username'],
+					'isLoggedIn' => true,
+				];
+				}
+				else{
+					return "maaf email dan passsword salah gunakan email terbaru yang terakhir teregister apabila tetap error maka register baru dengan email baru";
+				}
+			}
+			else{
+				return "maaf email dan passsword salah gunakan email terbaru yang terakhir teregister apabila tetap error maka register baru dengan email baru";
+				
+			}
+			
+		  }
+			
 		session()->set($data);
 		return true;
 	}
@@ -65,7 +103,7 @@ class Users extends BaseController
 			$rules = [
 				'firstname' => 'required|min_length[3]|max_length[20]',
 				'lastname' => 'required|min_length[3]|max_length[20]',
-				'username' => 'required|min_length[3]|max_length[20]|is_unique[admin.username]',
+				'username' => 'required|min_length[3]|max_length[100]|is_unique[login.username]',
 				'password' => 'required|min_length[8]|max_length[255]',
 				'password_confirm' => 'matches[password]',
 			];
@@ -74,21 +112,43 @@ class Users extends BaseController
 				$data['validation'] = $this->validator;
 			}else{
 				$model = new UserModel();
-
+				$username =  $this->request->getVar('username');
 				$newData = [
 					'firstname' => $this->request->getVar('firstname'),
 					'lastname' => $this->request->getVar('lastname'),
-					'username' => $this->request->getVar('username'),
+					'username' => $username,
 					'password' => $this->request->getVar('password'),
 				];
+				
+				$nis = $this->request->getVar('member_id');
 				$model->save($newData);
 				$session = session();
+				$data = [];
+				$anggota = new MemberModel();
+				
+				if($anggota->where("nis",$nis)
+				->set('email',$username)
+				->update()){
+					$anggota->where("nis",$nis)
+					->set('email',$username)
+					->update();
+				}
+				else{
+					echo "server error";
+				}
 				$session->setFlashdata('success', 'Successful Registration');
-				return redirect()->to('/');
+				return redirect()->to('/login');
 
 			}
+
 		}
 		$data['title'] = "Register";
+		
+		$model = new MemberModel();
+		$anggota = $model->findAll();
+		$data['anggota'] = $anggota;
+
+		
 		echo view('templates/header', $data);
 		echo view('register', $data);
 		echo view('templates/footer');
@@ -140,7 +200,6 @@ class Users extends BaseController
 		session()->destroy();
 		return redirect()->to('/');
 	}
-
 	//--------------------------------------------------------------------
 
 }

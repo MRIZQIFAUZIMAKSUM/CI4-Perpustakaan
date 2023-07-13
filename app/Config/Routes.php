@@ -30,12 +30,16 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Users::index', ['filter' => 'noauth']);
+$routes->get('/', 'Users::landingpage', ['filter' => 'noauth']);
+$routes->get('/login', 'Users::index', ['filter' => 'noauth']);
 $routes->get('logout', 'Users::logout');
 $routes->match(['get', 'post'],'register', 'Users::register', ['filter' => 'noauth']);
 $routes->match(['get', 'post'],'profile', 'Users::profile', ['filter' => 'auth']);
 $routes->get('dashboard', 'Dashboard::index', ['filter' => 'auth']);
-$routes->group('members', ['filter' => 'auth'], function($routes)
+
+$routes->post('kirim/denda', 'KatalogBuku::kirimDenda');
+
+$routes->group('members', function($routes)
 {
     $routes->get('list', 'Members::index');
 	$routes->add('add', 'Members::add');
@@ -52,7 +56,10 @@ $routes->group('katalog', ['filter' => 'auth'], function($routes)
 	$routes->add('pinjam_buku', 'KatalogBuku::pinjam');
 	$routes->add('kembali_buku', 'KatalogBuku::kembali');
 	$routes->add('daftar_pinjaman', 'KatalogBuku::list_pinjam');
+	$routes->get('izinkan/(:num)', 'KatalogBuku::izinkan/$1');
+	$routes->get('tolak/(:num)', 'KatalogBuku::tolak/$1');
 	$routes->post('find', 'KatalogBuku::findBook');
+	$routes->post('kirim/denda', 'KatalogBuku::kirimDenda');
 	$routes->get('delete/(:num)', 'KatalogBuku::delete/$1');
 	$routes->match(['get', 'post'],'edit/(:num)', 'KatalogBuku::edit/$1');
 });

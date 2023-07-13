@@ -208,11 +208,16 @@
 				<button onclick="toggleMenu();">&#9776;</button>
 			</li>
 			<li class="menu-item hidden"><a href="#">Home</a></li>
-			<li class="menu-item hidden"><a href="https://codeigniter4.github.io/userguide/" target="_blank">Docs</a>
+			<li class="menu-item hidden">
+				<a href="https://codeigniter4.github.io/userguide/" target="_blank">Docs</a>
 			</li>
-			<li class="menu-item hidden"><a href="https://forum.codeigniter.com/" target="_blank">Community</a></li>
-			<li class="menu-item hidden"><a
-					href="https://github.com/codeigniter4/CodeIgniter4/blob/master/CONTRIBUTING.md" target="_blank">Contribute</a>
+			<li class="menu-item hidden">
+				<a href="https://forum.codeigniter.com/" target="_blank">Community</a>
+			</li>
+			<li class="menu-item hidden">
+
+				<a href="https://github.com/codeigniter4/CodeIgniter4/blob/master/CONTRIBUTING.md" target="_blank">Contribute</a>
+
 			</li>
 		</ul>
 	</div>

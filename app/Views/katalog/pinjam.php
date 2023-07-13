@@ -12,13 +12,15 @@
         <form class="" action="pinjam_buku" method="post">
           <input type="hidden" name="book_id" id="book_id" value="<?= set_value('book_id') ?>">
           <div class="row">
-          <div class="col-12">
+                
+          <?php if(session()->get('id')==1){
+              echo '<div class="col-12">
               <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text">Member ID</label>
                     </div>
-                    <input type="text" name="member_id" id="member_id" class="form-control" placeholder="ID" value="<?= set_value('member_id') ?>">
+                    <input type="text" name="member_id" id="member_id" class="form-control" placeholder="ID" value="">
                     <div class="input-group-append">
                         <button onclick="cekMember()" class="btn btn-outline-secondary" type="button">Check</button>
                     </div>
@@ -31,10 +33,18 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text">Nama Anggota</label>
                     </div>
-                    <input type="text" readonly name="fullname" id="fullname" class="form-control" value="<?= set_value('fullname') ?>">
+                    <input type="text" readonly name="fullname" id="fullname" class="form-control" value="">
+              
                 </div>
               </div>
-            </div>
+            </div>';
+            }
+            else{
+              echo '<input type="hidden" name="member_id" id="member_id" class="form-control" placeholder="ID" value="'.session()->get('nis').'">
+              <input type="hidden" readonly name="fullname" id="fullname" class="form-control" value="'.session()->get('firstname')." ".session()->get('lastname').'">';
+            }
+              ?>
+         
             <div class="col-12">
               <div class="form-group">
                 <div class="input-group mb-3">

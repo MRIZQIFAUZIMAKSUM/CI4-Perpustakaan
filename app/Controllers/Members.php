@@ -27,11 +27,10 @@ class Members extends BaseController
 		if ($this->request->getMethod() == 'post') {
 			//let's do the validation here
 			$rules = [
-				'nik' => 'required|numeric|is_unique[anggota.nik]',
+				'nis' => 'required|numeric|is_unique[anggota.nis]',
 				'fullname' => 'required',
 				'phone' => 'required|numeric',
 				'email' => 'required|valid_email',
-				'alamat' => 'required',
 			];
 
 			if (! $this->validate($rules)) {
@@ -40,11 +39,10 @@ class Members extends BaseController
 				$model = new MemberModel();
 
 				$newData = [
-					'nik' => $this->request->getVar('nik'),
+					'nis' => $this->request->getVar('nis'),
 					'fullname' => $this->request->getVar('fullname'),
 					'phone' => $this->request->getVar('phone'),
 					'email' => $this->request->getVar('email'),
-					'alamat' => $this->request->getVar('alamat'),
 				];
 				$model->save($newData);
 				$session = session();
@@ -83,11 +81,10 @@ class Members extends BaseController
 		if ($this->request->getMethod() == 'post') {
 			//let's do the validation here
 			$rules = [
-				'nik' => 'required|numeric',
+				'nis' => 'required|numeric',
 				'fullname' => 'required',
 				'phone' => 'required|numeric',
 				'email' => 'required|valid_email',
-				'alamat' => 'required',
 			];
 
 			if (! $this->validate($rules)) {
@@ -95,11 +92,10 @@ class Members extends BaseController
 			}else{
 				$newData = [
 					'id' => $this->request->getPost('id'),
-					'nik' => $this->request->getPost('nik'),
+					'nis' => $this->request->getPost('nis'),
 					'fullname' => $this->request->getPost('fullname'),
 					'phone' => $this->request->getPost('phone'),
 					'email' => $this->request->getPost('email'),
-					'alamat' => $this->request->getPost('alamat'),
 				];
 				$model->save($newData);
 				$session = session();
@@ -119,8 +115,13 @@ class Members extends BaseController
 		$data = [];
 		$model = new MemberModel();
 		$id = $this->request->getPost('id');
-		$member = $model->find($id);
-		echo $member['fullname'];
+		if($model->where('nis', $id)->first()){
+			$member = $model->where('nis', $id)->first();
+			echo  $member['fullname'];
+		}
+		else{
+			echo "tidak ditemukan";
+		}
 	}
 
 	public function denda()
@@ -129,7 +130,7 @@ class Members extends BaseController
 		helper(['form']);
 
 		$db      = \Config\Database::connect();
-		$builder = $db->query('SELECT peminjaman.id, anggota.fullname, katalog.judul, katalog.ISBN, tanggal_kembali FROM peminjaman,anggota,katalog WHERE peminjaman.member_id = anggota.id AND peminjaman.book_id = katalog.id');
+		$builder = $db->query('SELECT peminjaman.id, anggota.fullname, katalog.judul, katalog.ISBN, tanggal_pinjam,tanggal_kembali FROM peminjaman,anggota,katalog WHERE peminjaman.member_id = anggota.nis AND peminjaman.book_id = katalog.id');
 		//$data['title'] = "List Anggota";
 		$data['denda'] = $builder->getResult('array');
 		echo view('templates/header', $data);

@@ -13,8 +13,8 @@
           <div class="row">
             <div class="col-12">
               <div class="form-group">
-               <label for="nik">NIK</label>
-               <input type="number" class="form-control" name="nik" id="nik" value="<?= set_value('nik') ?>">
+               <label for="nis">nis</label>
+               <input type="number" class="form-control" name="nis" id="nis" value="<?= set_value('nis') ?>">
               </div>
             </div>
             <div class="col-12">
@@ -35,12 +35,7 @@
                <input type="text" class="form-control" name="email" id="email" value="<?= set_value('email') ?>">
               </div>
             </div>
-            <div class="col-12">
-            <div class="form-group">
-                <label for="alamat">Alamat</label>
-                <textarea class="form-control" name="alamat" id="alamat" rows="2"></textarea>
-            </div>
-            </div>
+           
           <?php if (isset($validation)): ?>
             <div class="col-12">
               <div class="alert alert-danger" role="alert">

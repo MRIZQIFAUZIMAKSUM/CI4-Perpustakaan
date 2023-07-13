@@ -23,7 +23,21 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
+--
+-- Table structure for table `anggota`
+--
 
+CREATE TABLE `anggota` (
+  `id` int(11) NOT NULL,
+  `nik` bigint(20) NOT NULL,
+  `fullname` varchar(50) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `alamat` varchar(50) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- --------------------------------------------------------
 --
 -- Table structure for table `admin`
 --
@@ -40,22 +54,6 @@ CREATE TABLE `admin` (
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `anggota`
---
-
-CREATE TABLE `anggota` (
-  `id` int(11) NOT NULL,
-  `nik` bigint(20) NOT NULL,
-  `fullname` varchar(50) NOT NULL,
-  `phone` varchar(15) NOT NULL,
-  `email` varchar(30) NOT NULL,
-  `alamat` varchar(50) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `katalog`

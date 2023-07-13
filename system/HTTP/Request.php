@@ -425,7 +425,8 @@ class Request extends Message implements RequestInterface
 		{
 			return $value;
 		}
-
+		
+		
 		return filter_var($value, $filter, $flags);
 	}
 

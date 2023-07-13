@@ -1,8 +1,13 @@
-<div class="container">
+<zdiv class="container">
   <div class="row">
-    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 mt-5 pt-3 pb-3 bg-white from-wrapper">
-      <div class="container">
-        <h3>Login</h3>
+ 
+    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 mt-5 pt-3 pb-3  from-wrapper">
+    <center><img src="<?= base_url() ?>/img/SMK_N_3_TEGAL-removebg-preview.png" style="witdh: 150px;height: 150px;" alt=""><br>
+			<h3><b>PUSTAKAGAMA </b>SMKN 3 TEGAL</h3>
+      </center>
+    <div class="container bg-white">
+      
+      <h3>Login</h3>
         <hr>
         <?php if (session()->get('success')): ?>
           <div class="alert alert-success" role="alert">
@@ -11,12 +16,12 @@
         <?php endif; ?>
         <form class="" action="/" method="post">
           <div class="form-group">
-           <label for="username">Username</label>
-           <input type="text" class="form-control" name="username" id="username" value="<?= set_value('username') ?>">
+           <label for="username"><b>Username</b></label>
+           <input type="text" class="form-control" name="username" placeholder="masukan username" id="username" value="<?= set_value('username') ?>">
           </div>
           <div class="form-group">
-           <label for="password">Password</label>
-           <input type="password" class="form-control" name="password" id="password" value="">
+           <label for="password"><b>Password</b></label>
+           <input type="password" class="form-control" name="password" placeholder="masukan password" id="password" value="">
           </div>
           <?php if (isset($validation)): ?>
             <div class="col-12">
@@ -25,18 +30,14 @@
               </div>
             </div>
           <?php endif; ?>
-          <div class="row">
-            <div class="col-12 col-sm-4">
-              <button type="submit" class="btn btn-primary">Login</button>
-            </div>
-          </div>
+              <button type="submit" class="btn btn-primary btn btn-primary btn-block">Login</button>
+          
         </form>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="mx-auto mt-4">
-      Link project: <a href="https://github.com/sditalan12/CI4-Perpustakaan">https://github.com/sditalan12/CI4-Perpustakaan</a>
     </div>
   </div>
 </div>

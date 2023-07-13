@@ -8,7 +8,7 @@ class Home extends BaseController
 	}
 
 	public function redir(){
-		return redirect()->to('/');
+		return redirect()->to('/login');
 	}
 
 	//--------------------------------------------------------------------

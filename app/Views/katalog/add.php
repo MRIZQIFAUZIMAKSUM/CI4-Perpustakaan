@@ -49,7 +49,7 @@
             </div>
             <div class="col-12">
               <div class="form-group">
-               <label for="eksemplar">Eksemplar</label>
+               <label for="eksemplar">stok buku</label>
                <input type="number" class="form-control" name="eksemplar" id="eksemplar" value="<?= set_value('eksemplar') ?>">
               </div>
             </div>

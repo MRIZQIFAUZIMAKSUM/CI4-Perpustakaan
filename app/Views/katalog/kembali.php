@@ -12,7 +12,8 @@
         <form class="" action="kembali_buku" method="post">
           <input type="hidden" name="book_id" id="book_id" value="<?= set_value('book_id') ?>">
           <div class="row">
-          <div class="col-12">
+          <?php if(session()->get('id')==1):?>
+            <div class="col-12">
               <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -35,6 +36,13 @@
                 </div>
               </div>
             </div>
+            <?php else: ?>
+                    <input type="hidden" name="member_id" id="member_id" class="form-control" placeholder="ID" value="<?= session()->get('id')?>">  
+                    <input type="hidden" readonly name="fullname" id="fullname" class="form-control" value="<?= session()->get('fullname') ?>">
+               
+            <?php endif;
+              ?>
+
             <div class="col-12">
               <div class="form-group">
                 <div class="input-group mb-3">

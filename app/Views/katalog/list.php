@@ -24,9 +24,11 @@
                         <th scope="col">#</th>
                         <th scope="col">Judul</th>
                         <th scope="col">Pengarang</th>
-                        <th scope="col">Eksemplar</th>
+                        <th scope="col">stok buku</th>
                         <th scope="col">Ditambahkan pada</th>
-                        <th scope="col" colspan="2" >Action</th>
+                        <?php if(session()->get('id')==1):?>
+                        <th scope="col">Action</th>
+                        <?php endif; ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,8 +40,11 @@
                         <td><?= $buku['pengarang']; ?></td>
                         <td><?= $buku['eksemplar']; ?></td>
                         <td><?= $buku['created_at']; ?></td>
+                        <?php if(session()->get('id')==1):?>
                         <td><a href="edit/<?=$buku['id'];?>" class="btn btn-success">Edit</a></td>
                         <td><a href="delete/<?=$buku['id'];?>" class="btn btn-danger">Delete</a></td>
+                        
+                        <?php endif; ?>
                     </tr>
                     <tr id="accordion-<?=$buku['id']?>" class="collapse">
                         <td></td>

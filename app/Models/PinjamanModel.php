@@ -4,7 +4,7 @@ use CodeIgniter\Model;
 
 class PinjamanModel extends Model{
   protected $table = 'peminjaman';
-  protected $allowedFields = ['member_id', 'book_id', 'tanggal_kembali'];
+  protected $allowedFields = ['id','member_id', 'book_id', 'tanggal_kembali','status'];
   protected $beforeInsert = ['beforeInsert'];
   protected $beforeUpdate = ['beforeUpdate'];
   
