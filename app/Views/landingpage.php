@@ -20,7 +20,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color:#1561b2;" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="#page-top"><img src="img/SMK_N_3_TEGAL-removebg-preview.png" alt="..."  style="width: 120px; height:80px"/></a>
+                <a class="navbar-brand" href="#page-top"><img src="<?= base_url() ?>/img/SMK_N_3_TEGAL-removebg-preview.png" alt="..."  style="width: 120px; height:80px"/></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
@@ -40,7 +40,7 @@
             <div class="container">
                 <div class="masthead-subheading">Selamat Datang di Official website</div>
                 <div class="masthead-heading text-uppercase" style="border:1px; border-color:black">Pustakagama SMK N 3 TEGAL</div>
-                <a class="btn btn-primary btn-xl text-uppercase" href="/login">Login</a>
+                <a class="btn btn-primary btn-xl text-uppercase" href="<?= base_url() ?>/login">Login</a>
             </div>
         </header>
         <!-- Services-->
@@ -87,7 +87,7 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/1.jpg" alt="..."  style="width:450px;height:250px"/>
+                                <img class="img-fluid" src="<?= base_url() ?>/assets/img/portfolio/1.jpg" alt="..."  style="width:450px;height:250px"/>
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Kunjungan Studi tour</div>
@@ -102,7 +102,7 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/2.jpg" alt="..."  style="width:450px;height:250px"/>
+                                <img class="img-fluid" src="<?= base_url() ?>/assets/img/portfolio/2.jpg" alt="..."  style="width:450px;height:250px"/>
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Kunjungan Studi Tour II</div>
@@ -117,7 +117,7 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/3.jpg" alt="..." style="width:450px;height:250px" />
+                                <img class="img-fluid" src="<?= base_url() ?>/assets/img/portfolio/3.jpg" alt="..." style="width:450px;height:250px" />
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Kunjungan Studi Tour III</div>
@@ -169,7 +169,7 @@
         <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="<?= base_url() ?>/assets/img/close-icon.svg" alt="Close modal" /></div>
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
@@ -177,7 +177,7 @@
                                     <!-- Project details-->
                                     <h2 class="text-uppercase">Studi Tour kunjungan</h2>
                                     <p class="item-intro text-muted">Portfolio galeri foto dan kegiatan di perpustakaan SMK N 3 Tegal.</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/1.jpg" alt="..." />
+                                    <img class="img-fluid d-block mx-auto" src="<?= base_url() ?>/assets/img/portfolio/1.jpg" alt="..." />
                                     <p>Kunjungan studi tour Bapak dan Ibu Guru dari SMK Muhammadiyah Kemantran di Perpustakaan "Pustaka Gama" SMKN 3 Tegal dalam rangka persiapan Akreditasi Perpustakaan pada hari Jum'at, 9 April 2021</p>
                                     <ul class="list-inline">U
                                         <li>
@@ -204,7 +204,7 @@
         <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="<?= base_url() ?>/assets/img/close-icon.svg" alt="Close modal" /></div>
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
@@ -212,7 +212,7 @@
                                     <!-- Project details-->
                                     <h2 class="text-uppercase">Kunjungan Studi Tour 2</h2>
                                     <p class="item-intro text-muted">Berbagai Macam agenda foto dan momen yang ada di Pustakagama SMK N 3 Tegal.</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/2.jpg" alt="..." />
+                                    <img class="img-fluid d-block mx-auto" src="<?= base_url() ?>/assets/img/portfolio/2.jpg" alt="..." />
                                     <p>Kunjungan studi tour Bapak dan Ibu Guru dari SMAN 5 Tegal di Perpustakaan "Pustaka Gama" SMKN 3 Tegal dalam rangka persiapan Akreditasi Perpustakaan pada hari kamis, 18 februari 2021!</p>
                                     <ul class="list-inline">
                                         <li>
@@ -239,7 +239,7 @@
         <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="<?= base_url() ?>/assets/img/close-icon.svg" alt="Close modal" /></div>
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
@@ -247,7 +247,7 @@
                                     <!-- Project details-->
                                     <h2 class="text-uppercase">Kunjungan Studi Tour III</h2>
                                     <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/3.jpg" alt="..." />
+                                    <img class="img-fluid d-block mx-auto" src="<?= base_url() ?>/assets/img/portfolio/3.jpg" alt="..." />
                                     <p>Kunjungan studi tiru Pustakawan SMAN 1 Tegal di Perpustakaan "Pustaka Gama" SMKN 3 Tegal dalam rangka persiapan Akreditasi Perpustakaan SMAN 1 Tegal
 Berikut adalah beberapa kata kunci yang terkait dengan sistem informasi perpustakaan:</p>
                                     <ul class="list-inline">

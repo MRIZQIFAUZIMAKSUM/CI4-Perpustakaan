@@ -29,8 +29,6 @@ class Members extends BaseController
 			$rules = [
 				'nis' => 'required|numeric|is_unique[anggota.nis]',
 				'fullname' => 'required',
-				'phone' => 'required|numeric',
-				'email' => 'required|valid_email',
 			];
 
 			if (! $this->validate($rules)) {
@@ -130,7 +128,7 @@ class Members extends BaseController
 		helper(['form']);
 
 		$db      = \Config\Database::connect();
-		$builder = $db->query('SELECT peminjaman.id, anggota.fullname, katalog.judul, katalog.ISBN, tanggal_pinjam,tanggal_kembali FROM peminjaman,anggota,katalog WHERE peminjaman.member_id = anggota.nis AND peminjaman.book_id = katalog.id');
+		$builder = $db->query('SELECT peminjaman.id,peminjaman.member_id, anggota.fullname,anggota.email, katalog.judul, katalog.ISBN, tanggal_pinjam,tanggal_kembali FROM peminjaman,anggota,katalog WHERE peminjaman.member_id = anggota.nis AND peminjaman.book_id = katalog.id');
 		//$data['title'] = "List Anggota";
 		$data['denda'] = $builder->getResult('array');
 		echo view('templates/header', $data);

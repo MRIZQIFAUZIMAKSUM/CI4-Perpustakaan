@@ -9,9 +9,20 @@ function cekMember() {
           console.log(data);
           if (data=="tidak ditemukan"){
             alert("nis tidak ditemukan");
+            $('#sbmtbtn').addClass("disabled");
+            $('#sbmtbtn').attr('type','button');
+          }
+          else if (data=="anda sudah daftar silahkan login"){
+            alert(data);
+            $('#sbmtbtn').addClass("disabled");
+            $('#sbmtbtn').attr('type','button');
           }
           else{
+            $('#sbmtbtn').attr('type','submit');
+            $('#sbmtbtn').removeClass('disabled');
+            $('#sbmtbtn').attr('type','submit');
             const myArray = data.split(" ");
+            console.log(myArray)
             let word = myArray[0];
             $("#firstname").val(word);
             var lastword=""

@@ -34,12 +34,11 @@ class Users extends BaseController
 				$userauth = $this->setUserSession($user);
 				//$session->setFlashdata('success', 'Successful Registration');
 				if ($userauth==true){
-					return redirect()->to('dashboard');
+					return redirect()->to('/dashboard');
 				}
 				else{
 					return redirect()->to('/login?msg='+$userauth);
 				}
-
 			}
 		}
 
@@ -57,6 +56,7 @@ class Users extends BaseController
 		{
 			$data = [
 				'id' => $user['id'],
+				'role' => $user['role'],
 				'firstname' => $user['firstname'],
 				'lastname' => $user['lastname'],
 				'username' => $user['username'],
@@ -73,6 +73,7 @@ class Users extends BaseController
 				$data = [
 					'id' => $user['id'],
 					'nis' => $nis,
+					'role' => $user['role'],
 					'firstname' => $user['firstname'],
 					'lastname' => $user['lastname'],
 					'username' => $user['username'],
@@ -111,19 +112,10 @@ class Users extends BaseController
 			if (! $this->validate($rules)) {
 				$data['validation'] = $this->validator;
 			}else{
-				$model = new UserModel();
-				$username =  $this->request->getVar('username');
-				$newData = [
-					'firstname' => $this->request->getVar('firstname'),
-					'lastname' => $this->request->getVar('lastname'),
-					'username' => $username,
-					'password' => $this->request->getVar('password'),
-				];
-				
+			    
 				$nis = $this->request->getVar('member_id');
-				$model->save($newData);
-				$session = session();
-				$data = [];
+				$username =  $this->request->getVar('username');
+			    $data = [];
 				$anggota = new MemberModel();
 				
 				if($anggota->where("nis",$nis)
@@ -136,9 +128,20 @@ class Users extends BaseController
 				else{
 					echo "server error";
 				}
+				
+				$model = new UserModel();
+				$newData = [
+					'firstname' => $this->request->getVar('firstname'),
+					'lastname' => $this->request->getVar('lastname'),
+					'username' => $username,
+					'role' => "siswa",
+					'password' => $this->request->getVar('password'),
+				];
+				$model->save($newData);
+				$session = session();
+				
 				$session->setFlashdata('success', 'Successful Registration');
 				return redirect()->to('/login');
-
 			}
 
 		}
@@ -147,7 +150,6 @@ class Users extends BaseController
 		$model = new MemberModel();
 		$anggota = $model->findAll();
 		$data['anggota'] = $anggota;
-
 		
 		echo view('templates/header', $data);
 		echo view('register', $data);

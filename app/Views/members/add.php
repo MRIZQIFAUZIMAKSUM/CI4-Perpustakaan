@@ -9,7 +9,7 @@
             <?= session()->get('success') ?>
           </div>
         <?php endif; ?>
-        <form class="" action="add" method="post">
+        <form class="" action="<?= base_url() ?>/members/add" method="post">
           <div class="row">
             <div class="col-12">
               <div class="form-group">
@@ -23,18 +23,7 @@
                <input type="text" class="form-control" name="fullname" id="fullname" value="<?= set_value('fullname') ?>">
               </div>
             </div>
-            <div class="col-12 col-sm-4">
-              <div class="form-group">
-               <label for="phone">No. Telp</label>
-               <input type="tel" class="form-control" name="phone" id="phone" value="<?= set_value('phone') ?>">
-              </div>
-            </div>
-            <div class="col-12 col-sm-8">
-              <div class="form-group">
-               <label for="email">Email address</label>
-               <input type="text" class="form-control" name="email" id="email" value="<?= set_value('email') ?>">
-              </div>
-            </div>
+            
            
           <?php if (isset($validation)): ?>
             <div class="col-12">

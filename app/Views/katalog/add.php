@@ -9,8 +9,14 @@
             <?= session()->get('success') ?>
           </div>
         <?php endif; ?>
-        <form class="" action="add" method="post">
+        <form class="" action="<?= base_url() ?>/add" method="post">
           <div class="row">
+          <div class="col-12">
+              <div class="form-group">
+               <label for="sampul_buku">sampul buku</label>
+               <input type="file" class="form-control" name="sampul_buku" id="sampul_buku" value="<?= set_value('sampul_buku') ?>">
+              </div>
+            </div>
             <div class="col-12">
               <div class="form-group">
                <label for="ISBN">ISBN</label>

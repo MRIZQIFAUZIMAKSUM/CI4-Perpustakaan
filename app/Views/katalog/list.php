@@ -41,8 +41,8 @@
                         <td><?= $buku['eksemplar']; ?></td>
                         <td><?= $buku['created_at']; ?></td>
                         <?php if(session()->get('id')==1):?>
-                        <td><a href="edit/<?=$buku['id'];?>" class="btn btn-success">Edit</a></td>
-                        <td><a href="delete/<?=$buku['id'];?>" class="btn btn-danger">Delete</a></td>
+                        <td><a href="<?= base_url() ?>/edit/<?=$buku['id'];?>" class="btn btn-success">Edit</a></td>
+                        <td><a href="<?= base_url() ?>/delete/<?=$buku['id'];?>" class="btn btn-danger">Delete</a></td>
                         
                         <?php endif; ?>
                     </tr>

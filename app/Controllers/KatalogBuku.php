@@ -196,7 +196,14 @@ class KatalogBuku extends BaseController
 		helper(['form']);
 		//$model = new PinjamanModel();
 		$db      = \Config\Database::connect();
-		$builder = $db->query('SELECT peminjaman.id, anggota.fullname, katalog.judul, katalog.ISBN, tanggal_pinjam, tanggal_kembali, peminjaman.status FROM peminjaman JOIN anggota ON anggota.nis = peminjaman.member_id JOIN katalog ON katalog.id = peminjaman.book_id');
+		$role = session()->get('role');
+		if (session()->get('role') == 'admin'){
+		   $builder = $db->query('SELECT peminjaman.id, anggota.fullname, katalog.judul, katalog.ISBN, tanggal_pinjam, tanggal_kembali, peminjaman.status FROM peminjaman JOIN anggota ON anggota.nis = peminjaman.member_id JOIN katalog ON katalog.id = peminjaman.book_id');
+		}
+		else {
+		   $nis = session()->get('nis');
+		   $builder = $db->query('SELECT peminjaman.id, anggota.fullname, katalog.judul, katalog.ISBN, tanggal_pinjam, tanggal_kembali, peminjaman.status FROM peminjaman JOIN anggota ON anggota.nis = peminjaman.member_id JOIN katalog ON katalog.id = peminjaman.book_id where peminjaman.member_id = '.$nis);
+		}
 		//$data['title'] = "List Anggota";
 		$data['pinjaman'] = $builder->getResult();
 		echo view('templates/header', $data);
@@ -237,21 +244,22 @@ class KatalogBuku extends BaseController
 	public function kirimDenda()
 	{
 		
-		$nama_penerima = "ozi"; //$this->request->getPost('nama_penerima');
-		$judul_buku = "blabla"; //$this->request->getPost('judul_buku');
-		$tanggal_pinjam =  "22-07-2023";//$this->request->getPost('tanggal_pinjam');
-		$tanggal_kembali = "1-08-2023"; //$this->request->getPost('tanggal_kembali');
-		$jml_hari ="3"; //$this->request->getPost('jml_hari');
-		$jml_denda ="6000"; //$this->request->getPost('jml_denda');
-		$tgl_sekarang ="3-08-2023"; //$this->request->getPost('tgl_sekarang');
-		$email_siswa = "fauzimaksumstartup@gmail.com";
+		$nama_penerima = $this->request->getPost('nama_penerima');
+		$judul_buku = $this->request->getPost('judul_buku');
+		$tanggal_pinjam =  $this->request->getPost('tanggal_pinjam');
+		$tanggal_kembali = $this->request->getPost('tanggal_kembali');
+		$jml_hari = $this->request->getPost('jml_hari');
+		$jml_denda = $this->request->getPost('jml_denda');
+		//$tgl_sekarang ="3-08-2023"; //$this->request->getPost('tgl_sekarang');
+		$email_siswa = "fauzimaksum30@gmail.com";
 		$mail = new PHPMailer(true);
+		$session = session();
 		try {
-			$pdf = new Fpdf();
-			$pdf->AddPage();
-			$pdf->SetFont('Arial','B',16);
-			$pdf->Cell(40,10,'tgl 1 +IO2000 tgl 2 +2000 total 4000');
-			$content = $pdf->Output('F','denda/'.$nama_penerima.$tgl_sekarang.'.pdf');
+			// $pdf = new Fpdf();
+			// $pdf->AddPage();
+			// $pdf->SetFont('Arial','B',16);
+			// $pdf->Cell(40,10,'tgl 1 +IO2000 tgl 2 +2000 total 4000');
+			// $content = $pdf->Output('F','denda/'.$nama_penerima.$tgl_sekarang.'.pdf');
 			//Server settings
 			$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
 			$mail->isSMTP();                                            //Send using SMTP
@@ -272,15 +280,20 @@ class KatalogBuku extends BaseController
 		
 			//Attachments
 			// $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-			$mail->addAttachment('denda/'.$nama_penerima.$tgl_sekarang.'.pdf', $nama_penerima.'.pdf');    //Optional name
+			//$mail->addAttachment('denda/'.$nama_penerima.$tgl_sekarang.'.pdf', $nama_penerima.'.pdf');    //Optional name
 		
 			//Content
 			$mail->isHTML(true);                                  //Set email format to HTML
 			$mail->Subject = 'Keterlambatan Pengembalian Buku';
-			$mail->Body    = 'Maaf Anda sudah Terlambat mengembalikan Buku <b>'.$judul_buku.'</b> yang dipinjam dari Tanggal : <b> '.$tanggal_pinjam.' </b> Sampai Tanngal : <b> '.$tanggal_kembali.' </b> yang berarti Anda Telat mengembalikan Buku Selama : <b> '.$jml_hari.' </b> maka Anda dikenakan Denda Sebesar : <b> RP.'.$jml_denda.'</b> Mohon untuk Segera dikembalikan Buku tersebut dan melunasi Denda Anda di <b> Perpustakaan SMKN 3 Tegal </b> untuk detail Denda Anda bisa dilihat di lampiran dibawah';
+			$mail->Body    = 'Maaf Anda sudah Terlambat mengembalikan Buku <b>'.$judul_buku.'</b> yang dipinjam dari Tanggal : <b> '.$tanggal_pinjam.' </b> Sampai Tanngal : <b> '.$tanggal_kembali.' </b> yang berarti Anda Telat mengembalikan Buku Selama : <b> '.$jml_hari.' </b> maka Anda dikenakan Denda Sebesar : <b> RP.'.$jml_denda.'</b> Mohon untuk Segera dikembalikan Buku tersebut dan melunasi Denda Anda di <b> Perpustakaan SMKN 3 Tegal </b>';
 		
 			$mail->send();
-			echo 'Message has been sent';
+			$mail->SMTPDebug = 0;
+			$session->setFlashdata('success', 'Tagihan Telah Dikirim!');
+			echo "<script language='javascript' type='text/javascript'>
+			alert('Tagihan Telah Dikirim! silahkan kembali ke menu denda');
+			window.location.href = '/members/denda';
+		   </script>";
 		} catch (Exception $e) {
 			echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 		}

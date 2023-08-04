@@ -16,7 +16,6 @@ class PinjamanModel extends Model{
   }
 
   protected function beforeUpdate(array $data){
-    $data['data']['tanggal_kembali'] = date('Y-m-d');
     return $data;
   }
 }

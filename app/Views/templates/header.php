@@ -13,7 +13,7 @@
      ?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
-      <a class="navbar-brand" href="/">Perpustakaan</a>
+      <a class="navbar-brand" href="<?= base_url() ?>/">Perpustakaan</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -21,7 +21,7 @@
       <?php if (session()->get('isLoggedIn')): ?>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item <?= ($uri->getSegment(1) == 'dashboard' ? 'active' : null) ?>">
-            <a class="nav-link"  href="/dashboard">Dashboard</a>
+            <a class="nav-link"  href="<?= base_url() ?>/dashboard">Dashboard</a>
           </li>
           <!-- Dropdown Buku -->
           <li class="nav-item dropdown">
@@ -29,15 +29,16 @@
               Buku
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarBuku">
-            <?php if(session()->get('id')==1):
-              echo '<a class="dropdown-item" href="/katalog/add">Tambah Katalog</a>';
-            else:
+              <?php if(session()->get('id')==1): ?>
+              <a class="dropdown-item" href="<?= base_url() ?>/katalog/add">Tambah Katalog</a>
+           <?php else:
+                echo "";
             endif;
               ?>
-              <a class="dropdown-item" href="/katalog/list">Katalog Buku</a>
-              <a class="dropdown-item" href="/katalog/pinjam_buku">Pinjam Buku</a>
-              <a class="dropdown-item" href="/katalog/kembali_buku">Kembalikan Buku</a>
-              <a class="dropdown-item" href="/katalog/daftar_pinjaman">Daftar Pinjaman</a>
+              <a class="dropdown-item" href="<?= base_url() ?>/katalog/list">Katalog Buku</a>
+              <a class="dropdown-item" href="<?= base_url() ?>/katalog/pinjam_buku">Pinjam Buku</a>
+              <a class="dropdown-item" href="<?= base_url() ?>/katalog/kembali_buku">Kembalikan Buku</a>
+              <a class="dropdown-item" href="<?= base_url() ?>/katalog/daftar_pinjaman">Daftar Pinjaman</a>
             </div>
           </li>
           <!-- Dropdown Anggota -->
@@ -46,21 +47,25 @@
               Anggota
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarAnggota">
-            <?php if(session()->get('id')==1):
-              echo '<a class="dropdown-item" href="/members/add">Daftar</a>';
-            else:
+             <?php if(session()->get('id')==1): ?>
+              <a class="dropdown-item" href="<?= base_url() ?>/members/add">Daftar</a>
+           <?php else:
                 echo "";
             endif;
               ?>
-              
-              <a class="dropdown-item" href="/members/list">List Anggota</a>
-              <a class="dropdown-item" href="/members/denda">Denda</a>
+                <?php if(session()->get('id')==1): ?>
+              <a class="dropdown-item" href="<?= base_url() ?>/members/list">List Anggota</a>
+           <?php else:
+                echo "";
+            endif;
+              ?>
+              <a class="dropdown-item" href="<?= base_url() ?>/members/denda">Denda</a>
             </div>
           </li>
         </ul>
         <ul class="navbar-nav my-2 my-lg-0">
         <li class="nav-item active">
-            <a class="nav-link"  href="#"> <?php if(session()->get('id')==1):
+            <a class="nav-link"  href="<?= base_url() ?>/dashboard"> <?php if(session()->get('id')==1):
               echo "Admin";
             else:
                 echo "User";
@@ -72,18 +77,18 @@
               <?= session()->get('username')?>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarProfile">
-              <a class="dropdown-item" href="/profile">Edit Profile</a>
-              <a class="dropdown-item" href="/logout">Logout</a>
+              <a class="dropdown-item" href="<?= base_url() ?>/profile">Edit Profile</a>
+              <a class="dropdown-item" href="<?= base_url() ?>/logout">Logout</a>
             </div>
           </li>
         </ul>
       <?php else: ?>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item <?= ($uri->getSegment(1) == '' ? 'active' : null) ?>">
-            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="<?= base_url() ?>/login">Login</a>
           </li>
           <li class="nav-item <?= ($uri->getSegment(1) == 'register' ? 'active' : null) ?>">
-            <a class="nav-link" href="/register">Register</a>
+            <a class="nav-link" href="<?= base_url() ?>/register">Register</a>
           </li>
         </ul>
         <?php endif; ?>

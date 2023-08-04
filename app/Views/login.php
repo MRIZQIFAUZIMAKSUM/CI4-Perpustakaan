@@ -14,7 +14,7 @@
             <?= session()->get('success') ?>
           </div>
         <?php endif; ?>
-        <form class="" action="/" method="post">
+        <form class="" action="<?= base_url() ?>/" method="post">
           <div class="form-group">
            <label for="username"><b>Username</b></label>
            <input type="text" class="form-control" name="username" placeholder="masukan username" id="username" value="<?= set_value('username') ?>">
@@ -33,6 +33,7 @@
               <button type="submit" class="btn btn-primary btn btn-primary btn-block">Login</button>
           
         </form>
+        <br><br>
       </div>
     </div>
   </div>

@@ -9,7 +9,7 @@
             <?= session()->get('success') ?>
           </div>
         <?php endif; ?>
-        <form class="" action="pinjam_buku" method="post">
+        <form class="" action="<?= base_url() ?>/katalog/pinjam_buku" method="post">
           <input type="hidden" name="book_id" id="book_id" value="<?= set_value('book_id') ?>">
           <div class="row">
                 

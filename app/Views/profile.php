@@ -9,7 +9,7 @@
             <?= session()->get('success') ?>
           </div>
         <?php endif; ?>
-        <form class="" action="/profile" method="post">
+        <form class="" action="<?= base_url() ?>/profile" method="post">
           <div class="row">
             <div class="col-12 col-sm-6">
               <div class="form-group">
