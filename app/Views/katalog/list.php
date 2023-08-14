@@ -18,45 +18,40 @@
 
     <div class="row">
         <div class="mb-3">
-            <table class="table table-hover">
+            <table class="table table-hover" id="tabel_buku">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">Gambar</th>
                         <th scope="col">Judul</th>
                         <th scope="col">Pengarang</th>
-                        <th scope="col">stok buku</th>
+                        <th scope="col">ISBN</th>
+                        <th scope="col">Penerbit</th>
+                        <th scope="col">Tahun Terbit</th>    
                         <th scope="col">Ditambahkan pada</th>
-                        <?php if(session()->get('id')==1):?>
                         <th scope="col">Action</th>
-                        <?php endif; ?>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $counter = 0; 
                     foreach ($buku as $buku):?>
-                    <tr data-toggle="collapse" data-target="#accordion-<?=$buku['id']?>" class="clickable">
+                    <tr class="clickable">
                         <th scope="row"><?= $counter += 1 ?></th>
-                        <td><?= $buku['judul']; ?></td>
-                        <td><?= $buku['pengarang']; ?></td>
-                        <td><?= $buku['eksemplar']; ?></td>
+                        <td><img src="<?= $buku['Image-URL-M']; ?>"loading="lazy"></td>
+                        <td><?= $buku['Book-Title']; ?></td>
+                        <td><?= $buku['Book-Author']; ?></td>
+                        <td><?= $buku['ISBN']; ?></td>
+                        <td><?= $buku['Publisher']; ?></td>
+                        <td><?= $buku['Year-Of-Publication']; ?></td>
                         <td><?= $buku['created_at']; ?></td>
-                        <?php if(session()->get('id')==1):?>
-                        <td><a href="<?= base_url() ?>/edit/<?=$buku['id'];?>" class="btn btn-success">Edit</a></td>
-                        <td><a href="<?= base_url() ?>/delete/<?=$buku['id'];?>" class="btn btn-danger">Delete</a></td>
-                        
+                        <?php if(session()->get('role')=="admin"):?>
+                        <td><a href="<?= base_url() ?>/katalog/edit/<?=$buku['id'];?>" class="btn btn-success">Edit</a></td>
+                        <td><a href="<?= base_url() ?>/katalog/delete/<?=$buku['id'];?>" class="btn btn-danger">Delete</a></td>
+                        <?php else:?>
+                        <td><a href="<?= base_url() ?>/katalog/pinjam_buku?isbn=<?=$buku['ISBN'];?>" class="btn btn-success">Pinjam Buku</a></td>
                         <?php endif; ?>
                     </tr>
-                    <tr id="accordion-<?=$buku['id']?>" class="collapse">
-                        <td></td>
-                        <td colspan="6">
-                            <div>
-                            <span><b>ISBN</b>: <?= $buku['ISBN']; ?></span><br>
-                                <span><b>Penerbit</b>: <?= $buku['penerbit']; ?></span><br>
-                                <span><b>Tahun Terbit</b>: <?= $buku['tahun_terbit']; ?></span><br>
-                                <span><b>Kategori</b>: <?= $buku['kategori']; ?></span>
-                            </div>
-                        </td>
-                    </tr>    
+                   
                     <?php endforeach;?>
                 </tbody>
             </table>
@@ -64,3 +59,9 @@
     </div>
     
 </div>
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+<script>
+new DataTable('#tabel_buku');
+</script>

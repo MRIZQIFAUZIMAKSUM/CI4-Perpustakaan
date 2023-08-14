@@ -12,7 +12,7 @@
         <form class="" action="<?= base_url() ?>/katalog/kembali_buku" method="post">
           <input type="hidden" name="book_id" id="book_id" value="<?= set_value('book_id') ?>">
           <div class="row">
-          <?php if(session()->get('id')==1):?>
+          <?php if(session()->get('role')=="admin"):?>
             <div class="col-12">
               <div class="form-group">
                 <div class="input-group mb-3">

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="<?= base_url() ?>/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
     <title>Aplikasi Perpustakaan</title>
 </head>
 <body>
@@ -29,7 +31,7 @@
               Buku
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarBuku">
-              <?php if(session()->get('id')==1): ?>
+              <?php if(session()->get('role')=="admin"): ?>
               <a class="dropdown-item" href="<?= base_url() ?>/katalog/add">Tambah Katalog</a>
            <?php else:
                 echo "";
@@ -47,13 +49,14 @@
               Anggota
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarAnggota">
-             <?php if(session()->get('id')==1): ?>
-              <a class="dropdown-item" href="<?= base_url() ?>/members/add">Daftar</a>
+             <?php if(session()->get('role')=="admin"): ?>
+              <a class="dropdown-item" href="<?= base_url() ?>/members/add">Daftar siswa</a>
+              <a class="dropdown-item" href="<?= base_url() ?>/members/add_admin">Daftar admin</a>
            <?php else:
                 echo "";
             endif;
               ?>
-                <?php if(session()->get('id')==1): ?>
+                <?php if(session()->get('role')=="admin"): ?>
               <a class="dropdown-item" href="<?= base_url() ?>/members/list">List Anggota</a>
            <?php else:
                 echo "";
@@ -65,7 +68,7 @@
         </ul>
         <ul class="navbar-nav my-2 my-lg-0">
         <li class="nav-item active">
-            <a class="nav-link"  href="<?= base_url() ?>/dashboard"> <?php if(session()->get('id')==1):
+            <a class="nav-link"  href="<?= base_url() ?>/dashboard"> <?php if(session()->get('role')=="admin"):
               echo "Admin";
             else:
                 echo "User";

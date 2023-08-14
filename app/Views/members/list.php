@@ -28,7 +28,7 @@
                         <th scope="col">Email</th>
                         <th scope="col">Tanggal Registrasi</th>
 
-                        <?php if(session()->get('id')==1):
+                        <?php if(session()->get('role')=="admin"):
               echo '<th scope="col">Action</th>';
             else:
                 echo "";
@@ -48,10 +48,10 @@
                         <td><?= $anggota['phone']; ?></td>
                         <td><?= $anggota['email']; ?></td>
                         <td><?= $anggota['created_at']; ?></td>
-                        <?php if(session()->get('id')==1):
+                        <?php if(session()->get('role')=="admin"):
               echo '
-              <td><a href="edit/'.$anggota["id"].'" class="btn btn-success">Edit</a></td>
-              <td><a href="delete/'.$anggota["id"].'" class="btn btn-danger">Delete</a></td>';
+              <td><a href="members/edit/'.$anggota["id"].'" class="btn btn-success">Edit</a></td>
+              <td><a href="members/delete/'.$anggota["id"].'" class="btn btn-danger">Delete</a></td>';
             else:
                 echo "";
             endif;

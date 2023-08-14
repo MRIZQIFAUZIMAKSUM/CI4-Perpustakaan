@@ -2,6 +2,8 @@
 
 use App\Models\KatalogModel;
 use App\Models\PinjamanModel;
+use App\Models\buku_dataset;
+use App\Models\KategoriModel;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
@@ -14,11 +16,16 @@ class KatalogBuku extends BaseController
 		$data = [];
 		helper(['form']);
 
-		$model = new KatalogModel();
+		$model = new buku_dataset();
 		$buku = $model->findAll();
 
-		//$data['title'] = "List Anggota";
 		$data['buku'] = $buku;
+	
+		$model = new KategoriModel();
+		$kategori = $model->findAll();
+
+		$data['kategori'] = $kategori;
+
 		echo view('templates/header', $data);
 		echo view('katalog/list');
 		echo view('templates/footer');
@@ -184,7 +191,7 @@ class KatalogBuku extends BaseController
 
 	public function findBook(){
 		$data = [];
-		$model = new KatalogModel();
+		$model = new buku_dataset();
 		$id = $this->request->getPost('ISBN');
 		$book = $model->where('ISBN', $id)->first();
 		echo "[\"$book[judul]\", $book[id]]";

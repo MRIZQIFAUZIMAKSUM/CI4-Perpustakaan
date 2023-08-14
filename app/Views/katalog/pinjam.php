@@ -13,7 +13,7 @@
           <input type="hidden" name="book_id" id="book_id" value="<?= set_value('book_id') ?>">
           <div class="row">
                 
-          <?php if(session()->get('id')==1){
+          <?php if(session()->get('role')=="admin"){
               echo '<div class="col-12">
               <div class="form-group">
                 <div class="input-group mb-3">
@@ -51,7 +51,7 @@
                     <div class="input-group-prepend">
                     <label class="input-group-text">Kode ISBN</label>
                     </div>
-                    <input type="text" name="ISBN" id="ISBN" class="form-control" placeholder="ISBN" value="<?= set_value('ISBN') ?>">
+                    <input type="text" name="ISBN" id="ISBN" class="form-control" placeholder="ISBN" value="<?= set_value('ISBN') ?><?php if(isset($_GET['isbn'])){echo $_GET['isbn'];}?>">
                     <div class="input-group-append">
                         <button onclick="cekBuku()" class="btn btn-outline-secondary" type="button">Check</button>
                     </div>

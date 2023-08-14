@@ -2,11 +2,11 @@
 
 use App\Models\MemberModel;
 use App\Models\PinjamanModel;
+use App\Models\UserModel;
 
 class Members extends BaseController
 {
-	public function index()
-	{
+	public function index(){
 		$data = [];
 		helper(['form']);
 
@@ -19,7 +19,46 @@ class Members extends BaseController
 		echo view('members/list');
 		echo view('templates/footer');
 	}
+	public function add_admin(){
+		$data = [];
+		helper(['form']);
 
+		if ($this->request->getMethod() == 'post') {
+			$rules = [
+				'firstname' => 'required|min_length[3]|max_length[20]',
+				'lastname' => 'required|min_length[3]|max_length[20]',
+				'username' => 'required|min_length[3]|max_length[100]|is_unique[login.username]',
+				'password' => 'required|min_length[8]|max_length[255]',
+				'password_confirm' => 'matches[password]',
+			];
+
+			if (! $this->validate($rules)) {
+				$data['validation'] = $this->validator;
+			}else{
+			    
+				$nis = $this->request->getVar('member_id');
+				$username =  $this->request->getVar('username');
+			    $data = [];
+				$model = new UserModel();
+				$newData = [
+					'firstname' => $this->request->getVar('firstname'),
+					'lastname' => $this->request->getVar('lastname'),
+					'username' => $username,
+					'role' => "admin",
+					'password' => $this->request->getVar('password'),
+				];
+				$model->save($newData);
+				$session = session();
+				
+				$session->setFlashdata('success', 'Admin Berhasil ditambahkan');
+				return redirect()->to('/members/add_admin');
+			}
+		}
+		$data['title'] = "Tambah Anggota";
+		echo view('templates/header', $data);
+		echo view('members/add_admin');
+		echo view('templates/footer');
+	}
 	public function add(){
 		$data = [];
 		helper(['form']);
@@ -46,7 +85,6 @@ class Members extends BaseController
 				$session = session();
 				$session->setFlashdata('success', 'Data anggota berhasil ditambahkan');
 				return redirect()->to(current_url());
-
 			}
 		}
 		$data['title'] = "Tambah Anggota";
@@ -54,7 +92,6 @@ class Members extends BaseController
 		echo view('members/add');
 		echo view('templates/footer');
 	}
-
 	public function delete(int $id){
 		$data = [];
 		helper(['form']);

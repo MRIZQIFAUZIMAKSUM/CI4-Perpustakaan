@@ -1,4 +1,4 @@
-<zdiv class="container">
+<div class="container">
   <div class="row">
  
     <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 mt-5 pt-3 pb-3  from-wrapper">
@@ -9,11 +9,7 @@
       
       <h3>Login</h3>
         <hr>
-        <?php if (session()->get('success')): ?>
-          <div class="alert alert-success" role="alert">
-            <?= session()->get('success') ?>
-          </div>
-        <?php endif; ?>
+        
         <form class="" action="<?= base_url() ?>/" method="post">
           <div class="form-group">
            <label for="username"><b>Username</b></label>

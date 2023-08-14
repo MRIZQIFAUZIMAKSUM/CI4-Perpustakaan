@@ -31,23 +31,23 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Users::landingpage', ['filter' => 'noauth']);
-
-$routes->get('/login', 'Users::index', ['filter' => 'noauth']);
+$routes->get('login', 'Users::index');
 $routes->get('logout', 'Users::logout');
 $routes->match(['get', 'post'],'register', 'Users::register', ['filter' => 'noauth']);
 $routes->match(['get', 'post'],'profile', 'Users::profile', ['filter' => 'auth']);
 $routes->get('dashboard', 'Dashboard::index', ['filter' => 'auth']);
 
-$routes->post('kirim/denda', 'KatalogBuku::kirimDenda');
+$routes->post('kirim/denda', 'KatalogBuku::kirimDenda',['filter' => 'auth']);
 
 $routes->group('members', function($routes)
 {
-    $routes->get('list', 'Members::index');
-	$routes->add('add', 'Members::add');
-	$routes->add('denda', 'Members::denda');
-	$routes->get('delete/(:num)', 'Members::delete/$1');
-	$routes->get('delete_denda/(:num)', 'Members::delete_denda/$1');
-	$routes->match(['get', 'post'],'edit/(:num)', 'Members::edit/$1');
+    $routes->get('list', 'Members::index',['filter' => 'auth']);
+	$routes->add('add', 'Members::add',['filter' => 'auth']);
+	$routes->add('add_admin', 'Members::add_admin',['filter' => 'auth']);
+	$routes->add('denda', 'Members::denda',['filter' => 'auth']);
+	$routes->get('delete/(:num)', 'Members::delete/$1',['filter' => 'auth']);
+	$routes->get('delete_denda/(:num)', 'Members::delete_denda/$1',['filter' => 'auth']);
+	$routes->match(['get', 'post'],'edit/(:num)', 'Members::edit/$1',['filter' => 'auth']);
 	$routes->post('find', 'Members::findMember');
 });
 $routes->group('katalog', ['filter' => 'auth'], function($routes)
@@ -64,6 +64,9 @@ $routes->group('katalog', ['filter' => 'auth'], function($routes)
 	$routes->get('delete/(:num)', 'KatalogBuku::delete/$1');
 	$routes->match(['get', 'post'],'edit/(:num)', 'KatalogBuku::edit/$1');
 });
+
+//perpusweb routes
+
 //$routes->match(['get', 'post'], '(:any)', 'Home::redir');
 
 /**

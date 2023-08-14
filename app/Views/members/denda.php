@@ -27,7 +27,7 @@
                         <th scope="col">Tanggal Pinjam</th>
                         <th scope="col">Tanggal Kembali</th>
                         <th scope="col">Denda</th>
-                        <?php if(session()->get('id')==1):?>
+                        <?php if(session()->get('role')=="admin"):?>
              <th scope="col">Action</th>
             <?php endif; ?>
                     </tr>
@@ -35,7 +35,7 @@
                 <tbody>
                     <?php $counter = 0; 
                     foreach ($denda as $denda):?>
-                     <?php if(session()->get('id')==1): ?>
+                     <?php if(session()->get('role')=="admin"): ?>
                     <tr>
                         <th scope="row"><?= $counter += 1 ?></th>
                         <td><?=$denda['fullname']; ?></td>

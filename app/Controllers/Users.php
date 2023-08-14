@@ -52,8 +52,7 @@ class Users extends BaseController
 	}
 
 	private function setUserSession($user){
-		if($user['id']==1)
-		{
+		if ($user['role']=="admin"){
 			$data = [
 				'id' => $user['id'],
 				'role' => $user['role'],
@@ -63,8 +62,7 @@ class Users extends BaseController
 				'isLoggedIn' => true,
 			];
 		}
-			
-		  else{
+		else{
 			$data = [];
 			$model = new MemberModel();
 			if($model->where('email',  $user['username'])->first()){
@@ -88,8 +86,8 @@ class Users extends BaseController
 				return "maaf email dan passsword salah gunakan email terbaru yang terakhir teregister apabila tetap error maka register baru dengan email baru";
 				
 			}
-			
-		  }
+		}
+		  
 			
 		session()->set($data);
 		return true;

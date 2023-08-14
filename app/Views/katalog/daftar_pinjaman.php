@@ -27,7 +27,7 @@
                         <th scope="col">Tanggal Pinjam</th>
                         <th scope="col">Tanggal Kembali</th>
                         <th scope="col">Status</th>
-                        <?php if(session()->get('id')==1):?>
+                        <?php if(session()->get('role')=="admin"):?>
                         <th scope="col">Aksi</th>
                         <?php endif; ?>
                     </tr>
@@ -59,7 +59,7 @@
                             <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
                             </svg>
                         <?php endif;?></td>
-                        <?php if(session()->get('id')==1): ?>
+                        <?php if(session()->get('role')=="admin"): ?>
                         <td>
                             <a href="<?= base_url() ?>/katalog/izinkan/<?=$pinjaman->id?>" class="btn btn-success">Izinkan</a><br><br>
                             <a href="<?= base_url() ?>/katalog/tolak/<?=$pinjaman->id?>" class="btn btn-danger">Tolak</a>
