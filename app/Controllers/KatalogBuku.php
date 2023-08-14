@@ -25,7 +25,7 @@ class KatalogBuku extends BaseController
 		$kategori = $model->findAll();
 
 		$data['kategori'] = $kategori;
-
+		$data['title'] = "katalog buku";
 		echo view('templates/header', $data);
 		echo view('katalog/list');
 		echo view('templates/footer');
