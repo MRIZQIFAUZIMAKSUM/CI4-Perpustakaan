@@ -64,7 +64,7 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text">Judul Buku</label>
                     </div>
-                    <input type="text" readonly name="judul" id="judul" class="form-control" value="<?= set_value('judul') ?>">
+                    <input type="text" readonly name="judul" id="judul" class="form-control" value="<?= set_value('judul') ?><?php if(isset($_GET['title'])){echo $_GET['title'];}?>">
                 </div>
               </div>
             </div>

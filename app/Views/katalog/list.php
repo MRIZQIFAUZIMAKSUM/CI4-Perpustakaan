@@ -48,7 +48,7 @@
                         <td><a href="<?= base_url() ?>/katalog/edit/<?=$buku['id'];?>" class="btn btn-success">Edit</a></td>
                         <td><a href="<?= base_url() ?>/katalog/delete/<?=$buku['id'];?>" class="btn btn-danger">Delete</a></td>
                         <?php else:?>
-                        <td><a href="<?= base_url() ?>/katalog/pinjam_buku?isbn=<?=$buku['ISBN'];?>" class="btn btn-success">Pinjam Buku</a></td>
+                        <td><a href="<?= base_url() ?>/katalog/pinjam_buku?isbn=<?=$buku['ISBN'];?>&title=<?=$buku['Book-Title'];?>" class="btn btn-success">Pinjam Buku</a></td>
                         <?php endif; ?>
                     </tr>
                    
